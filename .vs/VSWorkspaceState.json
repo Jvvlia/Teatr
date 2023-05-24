@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Teatr_BG",
+    "\\Teatr_BG.Tests",
+    "\\Teatr_BG\\Content",
+    "\\Teatr_BG\\Migrations",
+    "\\Teatr_BG\\Models",
+    "\\Teatr_BG\\Models\\DbModels",
+    "\\Teatr_BG\\Views",
+    "\\Teatr_BG\\Views\\Home",
+    "\\Teatr_BG\\Views\\Sales"
+  ],
+  "SelectedNode": "\\Teatr_BG\\Teatr_BG.csproj",
+  "PreviewInSolutionExplorer": false
+}

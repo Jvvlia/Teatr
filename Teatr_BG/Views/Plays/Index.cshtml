@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Teatr_BG.Models.DbModels.Play>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista spektakli</h2>
+<div style="background-color: #E6DAA5; margin: 15px; padding: 15px">
+    <p>
+        @Html.ActionLink("Dodaj spektakl", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Nazwa
+            </th>
+            <th>
+                Data
+            </th>
+            <th>
+                Cena biletu
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj informacje", "Edit", new { id = item.PlayID }) |
+                @Html.ActionLink("Rozwiń", "Details", new { id = item.PlayID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.PlayID })
+            </td>
+        </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,43 @@
+﻿@model Teatr_BG.Models.DbModels.Sale
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Szczegóły</h2>
+<div style="background-color: #E6DAA5; margin: 15px; padding: 15px">
+    <div>
+        <h4>Sprzedaże</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Numer telefonu klienta
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.PhoneNumber)
+            </dd>
+
+            <dt>
+                Nazwa sztuki
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Play.NameP)
+            </dd>
+
+            <dt>
+                Liczba biletów
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NumberTickets)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edytuj informacje", "Edit", new { id = Model.SaleID }) |
+        @Html.ActionLink("Powrót do listy", "Index")
+    </p>
+</div>

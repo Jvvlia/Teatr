@@ -1,0 +1,49 @@
+﻿@model Teatr_BG.Models.DbModels.Sale
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuń sprzedaż</h2>
+<div style="background-color: #E6DAA5; margin: 15px; padding: 15px">
+    <h3>Czy na pewno chcesz usunąć sprzedaż?</h3>
+    <div>
+        <h4>Sprzedaże</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Numer telefonu klienta
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.PhoneNumber)
+            </dd>
+
+            <dt>
+                Nazwa sztuki
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Play.NameP)
+            </dd>
+
+            <dt>
+                Liczba biletów
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NumberTickets)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy", "Index")
+        </div>
+    }
+    </div>
+</div>

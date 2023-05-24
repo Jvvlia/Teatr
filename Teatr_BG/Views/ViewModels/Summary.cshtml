@@ -1,0 +1,31 @@
+﻿@model Teatr_BG.Models.DbModels.ViewModel
+@{
+    ViewBag.Title = "Summary";
+}
+
+<h2>Podsumowanie</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Liczba klientów
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalClients)
+        </dd>
+
+        <dt>
+            Liczba biletów
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalTicketsSold)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href=" @Url.Action("Index", "Sales", new { area = "" }) ">Powrót do listy</a>
+</p>

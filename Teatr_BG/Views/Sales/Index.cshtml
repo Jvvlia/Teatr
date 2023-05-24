@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Teatr_BG.Models.DbModels.Sale>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista sprzedaży</h2>
+<div style="background-color: #E6DAA5; margin: 15px; padding: 15px">
+    <p>
+        @Html.ActionLink("Dodaj sprzedaż", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Numer telefonu klienta
+            </th>
+            <th>
+                Nazwa sztuki
+            </th>
+            <th>
+                Liczba biletów
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Play.NameP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberTickets)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj informacje", "Edit", new { id = item.SaleID }) |
+                @Html.ActionLink("Rozwiń", "Details", new { id = item.SaleID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.SaleID })
+            </td>
+        </tr>
+        }
+        <p><a class="btn btn-default" href="/ViewModels/Summary">Podsumowanie sprzedaży &raquo;</a></p>
+
+    </table>
+</div>

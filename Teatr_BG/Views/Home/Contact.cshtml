@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Dokumentacja";
+}
+<h2>@ViewBag.Title</h2>
+<div style="background-color: #E6DAA5; margin: 15px; padding: 15px">
+    <h3>Cel projektu</h3>
+    <p>
+        Stworzenie aplikacji umożliwiającej pracownikowi teatru obsługę spektakli, sprzedaży biletów i przechowywanie informacji o aktorach zatrudnionych w teatrze.
+    </p>
+    <h3>Zastosowanie biznesowe:</h3>
+    <p>
+        <ul>
+            <li>Ułatwienie obsługi sprzedaży biletów</li>
+            <li>Umożliwienie przechowywania, edytowania, dodawania i usuwania informacji o klientach</li>
+            <li>Umożliwienie przechowywania, edytowania, dodawania i usuwania informacji o aktorach</li>
+            <li> Umożliwienie przechowywania, edytowania, dodawania i usuwania informacji o spektaklach</li>
+        </ul>
+    </p>
+    <h3>Opis modeli:</h3>
+    <h4>Model "Play":</h4>
+    <p>
+        Atrybuty: PlayID, NameID, DateP, Price <br />
+        Opis: przechowywanie informacji o sztukach, ich numer ID, nazwę, datę i cenę biletu na dane przedstawienie.
+    </p>
+    <h4>Model "Sale":</h4>
+    <p>
+        Atrybuty: SaleID, ClientID, PlayID, NumberTickets <br />
+        Opis: jest to model podsumowania zamówienia, każde zamówienie na swój numer ID, zawiera ID klienta, ID sztuki i liczbę biletów sprzedanych podczas jednej transakcji.
+    </p>
+    <h4>Model "Client":</h4>
+    <p>
+        Atrybuty: ClientID, FirstName, LastName, PhoneNumber <br />
+        Opis: przechowywanie informacji o kliencie, jego ID, imię, nazwisko i numer telefonu.
+    </p>
+    <h4>Model "Actor":</h4>
+    <p>
+        Atrybuty: ActorID, FName, LName, Bio <br />
+        Opis: przechowywanie informacji o aktorach, ich numer ID, imię, nazwisko, a także ich krótki opis.
+    </p>
+    <h3>Opis widoków:</h3>
+    <p>Dla każdego z wymienionych modeli zostały utworzone widoki:
+        <ul>
+            <li>Create- umożliwiający dodawanie rekordów do odpowiedniej tabeli bazy</li>
+            <li>Delete- umożliwiający usuwanie rekordów z odpowiedniej tabeli bazy</li>
+            <li>Details- umożliwiający wyświetlanie szczegółów danego rekordu</li>
+            <li>Edit- umożliwiający edycję danego rekordu</li>
+        </ul>
+     które ułatwiają użytkownikowi wykonywanie operacji na bazie danych, odpowiadają za wyświetlania odpowiednich formularzy.
+    </p>
+    <h3>Opis kontrolerów:</h3>
+    <p>
+        <h4>HomeController</h4>
+        Kontroler HomeController dziedziczy po klasie Controller i obsługuje trzy akcje: Index, About i Contact.
+        <br />
+        Akcja index odpowiada za wyświetlanie strony startowej aplikacji. Ta akcja zwraca wynik wywołania widoku (View), który jest odpowiedzialny za renderowanie strony głównej aplikacji.
+        <br />
+        Akcja Index i Contact odpowiadają odpowiednio za wyświetlenie strony z instrukcją użytkownika i dokumentacją.
+        <h4>ViewModelsController</h4>
+        Kontroler ten obsługuje akcję Summary, która generuje podsumowanie sprzedaży na podstawie danych pobranych z bazy danych.
+        <br />
+        Akcja Summary- odpowiada za wygenerowanie podsumowania sprzedaży.
+        Pobiera dane sprzedaży z bazy danych lub innego źródła (przy użyciu metody GetSalesData).
+        Oblicza podsumowanie sprzedaży, takie jak łączna liczba klientów (totalClients) i łączna liczba sprzedanych biletów (totalTicketsSold).
+        Tworzy instancję view modelu (ViewModel) i przypisuje obliczone wartości podsumowania sprzedaży do odpowiednich właściwości.
+        Zwraca widok (View) Summary, przekazując stworzony view model.
+        <br />
+        Metoda prywatna GetSalesData zwraca listę obiektów Sale, służy do pobrania danych sprzedaży z bazy danych. Ta metoda używa obiektu DatabaseContext do połączenia z bazą danych.
+        Pobiera wszystkie dane sprzedaży (Sales) z bazy danych i zwraca je jako listę.
+        <h4>Pozostałe kontrolery:</h4>
+        <ul>
+            <li>ActorsController </li>
+            <li>ClientsController </li>
+            <li>PlaysController </li>
+            <li>SlesController </li>
+        </ul>
+        Kontrolery obsługują operacje CRUD (Create, Read, Update, Delete) na danych dotyczących
+        odpowiednio aktorów, klientów, sztuk teatralnych i dokonanych sprzedaży.
+        <br />
+        Akcja Index pobiera wszystkie rekordy i umożliwia ich wyświetlenie w widoku.
+        <br />
+        Akcja Details odpowiada za wyświetlanie szczegółowych informacji o konkretnym rekordzie. Sprawdza, czy podano odpowiedni identyfikator i pobiera rekord z bazy danych w celu wyświetlenia go.
+        <br />
+        Akcja Create odpowiada za wyświetlanie formularza do tworzenia nowego rekordu, zwraca widok (View) formularza do jego utworzenia.
+        Akcja Create (metoda POST) - obsługuje zatwierdzenie formularza utworzenia nowego rekordu. Sprawdza, czy przesłane dane są poprawne (przy użyciu ModelState.IsValid)
+        Jeśli dane są poprawne, dodaje go do bazy.
+        <br />
+        Akcja Edit z parametrem  int? id  odpowiada za wyświetlanie formularza edycji dla określonego rekordu. Ta akcja sprawdza, czy podano poprawny identyfikator,
+        następnie pobiera odpowiedni rekord z bazy danych (przy użyciu metody Find) i przekazuje go do widoku edycji.
+        <br />
+        Akcja Edit (metoda POST)- obsługuje zatwierdzenie formularza edycji rekordu. Sprawdza, czy przesłane dane są poprawne (przy użyciu ModelState.IsValid), jeśli dane są poprawne, aktualizuje stan edytowanego rekordu w bazie danych (przy użyciu EntityState.Modified) i zapisuje zmiany (przy użyciu db.SaveChanges()).
+        Następnie przekierowuje użytkownika do akcji "Index".
+        <br />
+        Akcja Delete z parametrem  int? id, która dpowiada za wyświetlanie potwierdzenia usunięcia dla określonego rekordu. Sprawdza także, czy podano poprawny identyfikator.
+    </p>
+    <h3>Opis bazy danych:</h3>
+    <p>
+        W bazie znajdują się 4 tabele:prawdza, czy przesłane dane są poprawne (przy użyciu ModelState.IsValid).
+        Jeśli dane są poprawne, dodaje
+        <ul>
+            <li>Sales (SaleID, ClientID, PlayID, NumberTickets)</li>
+            <li>Plays (PlayID, NameID, DateP, Price)</li>
+            <li>Clients (ClientID, FirstName, LastName, PhoneNumber)</li>
+            <li>Actors (ActorID, FName, LName, Bio)</li>
+        </ul>
+        Relacje:
+        <ul>
+            <li>Sales-Plays (relacja 1 do wielu- jedna sztuka, wiele sprzedanych biletów)</li>
+            <li>Sales-Clients (relacja 1 do wielu- jeden klient, wiele zakupionych biletów)</li>
+        </ul>
+    </p>
+    <h3>Diagram bazy danych:</h3>
+    <img src="../Content/img/img.png" alt="Diagram bazy danych" />
+    <h3>Podział obowiązków:</h3>
+    <p>
+        Julia Baranowska- pełna dokumentacja projektu, umieszczenie jej na stronie, instrukcja użytkownika, zmiana wyglądu aplikacji, zmiany w layoucie strony, stworzenie seeda do bazy danych, umieszczenie zasobów
+        <br />
+        Julia Głowa- stworzenie bazy danych, stworzenie kontrolerów obsługujących CRUD, stworzenie strony startowej obsługującej odnośniki do kontrolerów, zastosowanie ViewModela, wykorzystanie atrybutów Display, Key itp., wykorzystanie HttpStatusCodeResult
+    </p>
+</div>
+
